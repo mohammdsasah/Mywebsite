@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المهندس عبد الحكيم</title>
+<style>
+    * {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+    body {line-height:1.6; background:#f9f9f9; color:#333; transition: margin-right 0.3s;}
+    a {text-decoration:none; color:inherit;}
+
+    /* ---------- Sidebar ---------- */
+    .sidebar {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        top:0;
+        right:0;
+        background-color:#1a1a1a;
+        overflow-x:hidden;
+        transition:0.5s;
+        padding-top:60px;
+        z-index:1000;
+    }
+    .sidebar a {padding:15px 30px; text-decoration:none; font-size:1.2rem; color:#fff; display:block; transition:0.3s;}
+    .sidebar a:hover {background-color:#f5c518; color:#000;}
+    .sidebar .closebtn {position:absolute; top:20px; left:20px; font-size:2rem; cursor:pointer; color:#fff;}
+    .openbtn {
+        position:fixed; top:20px; right:20px;
+        font-size:2rem; background-color:#f5c518; color:#000;
+        border:none; padding:10px 15px; border-radius:5px;
+        cursor:pointer; z-index:1100; transition:0.3s;
+    }
+    .openbtn:hover {background:#e6b800;}
+
+    /* ---------- Hero ---------- */
+    .hero {background:url('https://images.unsplash.com/photo-1581090700227-375cd0cf1c4d?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+        height:80vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; color:#fff; position:relative;}
+    .hero::after {content:''; position:absolute; top:0; left:0; width:100%; height:100%; background-color: rgba(0,0,0,0.5);}
+    .hero-content {position:relative; z-index:1;}
+    .hero h2 {font-size:2.5rem; margin-bottom:10px;}
+    .hero p {font-size:1.2rem; margin-bottom:20px;}
+    .hero button {padding:10px 20px; background:#f5c518; border:none; color:#000; font-weight:bold; cursor:pointer; transition:0.3s;}
+    .hero button:hover {background:#e6b800;}
+
+    /* ---------- Sections ---------- */
+    section {padding:60px 20px; max-width:1100px; margin:auto; transition:0.3s;}
+
+    /* About */
+    .about {display:flex; flex-wrap:wrap; gap:30px; align-items:center;}
+    .about img {width:300px; border-radius:10px; transition:0.3s;}
+    .about img:hover {transform: scale(1.05);}
+    .about div {flex:1;}
+    .about h2 {color:#1a1a1a; margin-bottom:15px;}
+
+    /* Services */
+    .services {background:#f0f0f0; text-align:center;}
+    .services h2 {margin-bottom:30px;}
+    .services-container {display:flex; flex-wrap:wrap; justify-content:center; gap:20px;}
+    .service-card {background:#fff; padding:20px; border-radius:10px; width:250px; box-shadow:0 2px 8px rgba(0,0,0,0.1); transition:0.3s; cursor:pointer;}
+    .service-card:hover {transform: translateY(-5px) scale(1.03); box-shadow:0 5px 15px rgba(0,0,0,0.2);}
+    .service-card h3 {margin-bottom:10px; color:#f5c518;}
+
+    /* Portfolio */
+    .portfolio h2 {text-align:center; margin-bottom:30px;}
+    .portfolio-container {display:flex; flex-wrap:wrap; gap:20px; justify-content:center;}
+    .project {width:300px; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1); transition:0.3s; cursor:pointer;}
+    .project:hover {transform: scale(1.03); box-shadow:0 5px 15px rgba(0,0,0,0.2);}
+    .project img {width:100%; display:block;}
+    .project div {padding:15px; background:#fff;}
+    .project h3 {margin-bottom:10px; color:#f5c518;}
+
+    /* Gallery */
+    .gallery {padding:60px 20px; max-width:1100px; margin:auto; text-align:center;}
+    .gallery h2 {margin-bottom:30px;}
+    .gallery-container {display:flex; flex-wrap:wrap; gap:20px; justify-content:center;}
+    .gallery-container img {width:250px; border-radius:10px; cursor:pointer; transition:0.3s;}
+    .gallery-container img:hover {transform:scale(1.05); box-shadow:0 5px 15px rgba(0,0,0,0.2);}
+
+    /* Contact */
+    .contact h2 {text-align:center; margin-bottom:30px;}
+    .contact form {max-width:600px; margin:auto; display:flex; flex-direction:column; gap:15px;}
+    .contact input, .contact textarea {padding:10px; border-radius:5px; border:1px solid #ccc; width:100%; resize:none;}
+    .contact button {padding:10px; border:none; border-radius:5px; background:#f5c518; font-weight:bold; cursor:pointer; transition:0.3s;}
+    .contact button:hover {background:#e6b800;}
+
+    /* Footer */
+    footer {background:#1a1a1a; color:#fff; text-align:center; padding:20px 0;}
+    footer a {color:#f5c518; margin:0 10px;}
+
+    /* Back to top */
+    #backToTop {position:fixed; bottom:30px; right:30px; background:#f5c518; color:#000; padding:10px 15px; border:none; border-radius:50%; font-size:18px; cursor:pointer; display:none; z-index:1000; transition:0.3s;}
+    #backToTop:hover {background:#e6b800;}
+
+    @media(max-width:768px){
+        .about {flex-direction:column; text-align:center;}
+        .services-container, .portfolio-container, .gallery-container {flex-direction:column; align-items:center;}
+    }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div id="mySidebar" class="sidebar">
+    <span class="closebtn" onclick="closeSidebar()">×</span>
+    <a href="#about">عن المهندس</a>
+    <a href="#services">خدماتنا</a>
+    <a href="#portfolio">مشاريعنا</a>
+    <a href="#gallery">معرض الصور</a>
+    <a href="#contact">تواصل معنا</a>
+</div>
+
+<button class="openbtn" onclick="openSidebar()">☰</button>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h2>تصميم معماري مبتكر</h2>
+        <p>نحوّل أفكارك إلى مبانٍ تجمع بين الجمال والوظيفة</p>
+        <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">تواصل معنا</button>
+    </div>
+</section>
+
+<!-- About -->
+<section id="about">
+    <div class="about">
+        <img src="https://images.unsplash.com/photo-1522202222783-7b22e6e6d1de?auto=format&fit=crop&w=500&q=80" alt="عبد الحكيم">
+        <div>
+            <h2>عن المهندس عبد الحكيم</h2>
+            <p>المهندس عبد الحكيم متخصص في التصميم المعماري الداخلي والخارجي، بخبرة تتجاوز 10 سنوات في تنفيذ مشاريع مبتكرة تدمج الجمال والوظيفة.</p>
+            <ul>
+                <li>تصميم معماري داخلي</li>
+                <li>تصميم معماري خارجي</li>
+                <li>استشارات هندسية</li>
+                <li>إدارة المشاريع</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="services">
+    <h2>خدماتنا</h2>
+    <div class="services-container">
+        <div class="service-card"><h3>تصميم داخلي</h3><p>تصميم داخلي مبتكر يوازن بين الجمال والوظيفة.</p></div>
+        <div class="service-card"><h3>تصميم خارجي</h3><p>تصاميم معمارية خارجية تعكس هوية المشروع.</p></div>
+        <div class="service-card"><h3>استشارات هندسية</h3><p>تقديم حلول هندسية عملية وفعالة للمشاريع.</p></div>
+        <div class="service-card"><h3>إدارة المشاريع</h3><p>متابعة تنفيذ المشروع لضمان الجودة والمواعيد.</p></div>
+    </div>
+</section>
+
+<!-- Portfolio -->
+<section id="portfolio" class="portfolio">
+    <h2>مشاريعنا</h2>
+    <div class="portfolio-container">
+        <div class="project"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=500&q=80" alt="مشروع 1"><div><h3>مشروع سكني حديث</h3><p>تصميم داخلي وخارجي متكامل لسكن عصري.</p></div></div>
+        <div class="project"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=80" alt="مشروع 2"><div><h3>فيلا فاخرة</h3><p>تصميم معماري فاخر يوازن بين الراحة والفخامة.</p></div></div>
+        <div class="project"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=500&q=80" alt="مشروع 3"><div><h3>مكتب تجاري</h3><p>تصميم مكاتب حديثة لتعزيز الإنتاجية والراحة.</p></div></div>
+    </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery" class="gallery">
+  <h2>معرض الصور</h2>
+  <div class="gallery-container">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=80" alt="صورة 1">
+    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=500&q=80" alt="صورة 2">
+    <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=500&q=80" alt="صورة 3">
+    <img src="https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=500&q=80" alt="صورة 4">
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact">
+    <h2>تواصل معنا</h2>
+    <form>
+        <input type="text" placeholder="الاسم" required>
+        <input type="email" placeholder="البريد الإلكتروني" required>
+        <input type="tel" placeholder="رقم الهاتف" required>
+        <textarea rows="5" placeholder="رسالتك" required></textarea>
+        <button type="submit">إرسال الرسالة</button>
+    </form>
+</section>
+
+<footer>
+    <p>© 2025 المهندس عبد الحكيم | جميع الحقوق محفوظة</p>
+    <div>
+        <a href="#">إنستغرام</a> | 
+        <a href="#">فيسبوك</a> | 
+        <a href="#">لينكدإن</a> | 
+        <a href="#">واتساب</a>
+    </div>
+</footer>
+
+<button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+<script>
+    // Sidebar
+    const sidebar = document.getElementById("mySidebar");
+    const openBtn = document.querySelector(".openbtn");
+    function openSidebar(){sidebar.style.width="250px"; document.body.style.marginRight="250px";}
+    function closeSidebar(){sidebar.style.width="0"; document.body.style.marginRight="0";}
+
+    // غلق عند النقر خارج القائمة
+    document.addEventListener("click", function(event){
+        if(!sidebar.contains(event.target) && !openBtn.contains(event.target)){
+            closeSidebar();
+        }
+    });
+
+    // Smooth scroll لقائمة الروابط
+    const links = sidebar.querySelectorAll("a");
+    links.forEach(link => {
+        link.addEventListener("click", function(e){
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            target.scrollIntoView({behavior: "smooth"});
+            closeSidebar();
+        });
+    });
+
+    // Back to top
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', ()=>{if(window.scrollY>300) backToTop.style.display='block'; else backToTop.style.display='none';});
+
+    // Lightbox Projects
+    const projects = document.querySelectorAll('.project img');
+    projects.forEach(img=>{img.addEventListener('click', ()=>{
+        const overlay = document.createElement('div');
+        overlay.style.position='fixed'; overlay.style.top=0; overlay.style.left=0;
+        overlay.style.width='100%'; overlay.style.height='100%';
+        overlay.style.background='rgba(0,0,0,0.8)'; overlay.style.display='flex';
+        overlay.style.justifyContent='center'; overlay.style.alignItems='center';
+        overlay.style.zIndex=10000; overlay.style.flexDirection='column';
+        const enlarged = document.createElement('img'); enlarged.src=img.src;
+        enlarged.style.maxWidth='90%'; enlarged.style.maxHeight='90%'; enlarged.style.borderRadius='10px';
+        overlay.appendChild(enlarged);
+        overlay.addEventListener('click', ()=>overlay.remove());
+        document.body.appendChild(overlay);
+    });});
+
+    // Lightbox Gallery
+    const galleryImages = document.querySelectorAll('.gallery-container img');
+    let currentIndex = 0, overlay2, enlargedImg2, prevBtn, nextBtn;
+    galleryImages.forEach((img, index)=>{
+        img.addEventListener('click', ()=>{
+            currentIndex = index;
+            overlay2 = document.createElement('div'); overlay2.style.position='fixed';
+            overlay2.style.top=0; overlay2.style.left=0; overlay2.style.width='100%'; overlay2.style.height='100%';
+            overlay2.style.background='rgba(0,0,0,0.9)'; overlay2.style.display='flex';
+            overlay2.style.justifyContent='center'; overlay2.style.alignItems='center';
+            overlay2.style.zIndex=10000; overlay2.style.flexDirection='column';
+            enlargedImg2 = document.createElement('img'); enlargedImg2.src=galleryImages[currentIndex].src;
+            enlargedImg2.style.maxWidth='90%'; enlargedImg2.style.maxHeight='80%'; enlargedImg2.style.borderRadius='10px';
+            prevBtn = document.createElement('button'); nextBtn = document.createElement('button');
+            prevBtn.innerHTML='⟨'; nextBtn.innerHTML='⟩';
+            [prevBtn,nextBtn].forEach(btn=>{btn.style.background='#f5c518';btn.style.border='none';btn.style.fontSize='2rem';
+            btn.style.padding='10px 20px';btn.style.margin='10px';btn.style.borderRadius='5px';btn.style.cursor='pointer';});
+            prevBtn.addEventListener('click',e=>{e.stopPropagation(); currentIndex=(currentIndex-1+galleryImages.length)%galleryImages.length; enlargedImg2.src=galleryImages[currentIndex].src;});
+            nextBtn.addEventListener('click',e=>{e.stopPropagation(); currentIndex=(currentIndex+1)%galleryImages.length; enlargedImg2.src=galleryImages[currentIndex].src;});
+            overlay2.appendChild(prevBtn); overlay2.appendChild(enlargedImg2); overlay2.appendChild(nextBtn);
+            overlay2.addEventListener('click',()=>overlay2.remove());
+            document.body.appendChild(overlay2);
+        });
+    });
+</script>
+
+</body>
+</html>
